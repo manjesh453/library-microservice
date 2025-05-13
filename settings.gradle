@@ -1,1 +1,8 @@
 rootProject.name = 'Library-Management'
+
+
+include 'api-gateway'
+include 'book-service'
+include 'borrow-service'
+include 'server'
+include 'Users'
