@@ -20,11 +20,9 @@ public class BorrowServiceImpl implements BorrowBookService {
     private final RestTemplate restTemplate;
     private final UserService userService;
 
-    @Value("${borrow.url}")
-    private String borrowUrl;
+    private String borrowUrl="http://localhost:8080/api/borrow";
 
-    @Value("${book.url}")
-    private String bookUrl;
+    private String bookUrl="http://localhost:8080/api/book";
 
     @Override
     public String borrowBook(String bookId, String userId) {
