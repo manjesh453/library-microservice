@@ -83,7 +83,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         var jwt = jwtService.generateToken(user);
         return JwtAuthenticationResponse.builder().token(jwt)
-                .refreshToken(refreshToken.getToken()).userId(user.getId())
+                .refreshToken(refreshToken.getToken())
+                .userId(user.getId())
+                .role(user.getRole())
                 .userName(user.getFullname()).build();
 
     }

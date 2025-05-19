@@ -1,5 +1,6 @@
 package com.users.security.helper;
 
+import com.users.shared.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,4 +15,5 @@ public class JwtAuthenticationResponse {
     private String refreshToken;
     private String userId;
     private String userName;
+    private Role role;
 }
