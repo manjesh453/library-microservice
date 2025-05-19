@@ -14,12 +14,12 @@ import java.util.List;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public String addCategory(@RequestBody CategoryRequestDto category) {
         return categoryService.addCategory(category);
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/admin/update/{id}")
     public String updateBook(@RequestBody CategoryRequestDto category, @PathVariable String id) {
         return categoryService.updateCategory(category, id);
     }
@@ -29,7 +29,7 @@ public class CategoryController {
         return categoryService.getCategoryById(id);
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteCategory(@PathVariable String id) {
         return categoryService.deleteCategory(id);
     }
@@ -39,7 +39,7 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @PostMapping("/changeStatus/{id}")
+    @PostMapping("/admin/changeStatus/{id}")
     public String changeStatus(@RequestBody String status, @PathVariable String id) {
         return categoryService.changeCategoryStatus(status, id);
     }

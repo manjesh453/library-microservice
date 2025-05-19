@@ -14,7 +14,7 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public String addBook(@RequestBody BookRequestDto book) {
         return bookService.createBook(book);
     }
@@ -24,7 +24,7 @@ public class BookController {
         return bookService.updateBook(book, id);
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteBook(@PathVariable String id) {
         return bookService.deleteBook(id);
     }

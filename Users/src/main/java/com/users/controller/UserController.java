@@ -23,18 +23,19 @@ public class UserController {
         return userService.updateUser(user, userId);
     }
 
-    @GetMapping("/delete/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/delete/{userId}")
     public String deleteUserStatus(@PathVariable String userId) {
         return userService.deleteUser(userId);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/admin/getAll")
     public List<UserResponseDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/verifyUser/{userId}")
+    @GetMapping("/admin/verifyUser/{userId}")
     public String verifyUser(@PathVariable String userId) {
         return userService.changeStatusToActive(userId);
     }
