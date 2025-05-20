@@ -20,7 +20,7 @@ public class Category {
     @LastModifiedDate
     private Date lastModifiedDate;
     @Version
-    private Long version = 0L;
+    private Long version;
     private String categoryName;
     private String categoryDescription;
     private Status status;

@@ -20,7 +20,7 @@ public class Borrow {
     @LastModifiedDate
     private Date lastModifiedDate;
     @Version
-    private Long version = 0L;
+    private Long version;
     private String bookId;
     private String userId;
     private Date borrowDate;

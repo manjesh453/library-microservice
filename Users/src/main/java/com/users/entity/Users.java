@@ -34,7 +34,7 @@ public class Users implements UserDetails {
     @LastModifiedDate
     private Date lastModifiedDate;
     @Version
-    private Long version = 0L;
+    private Long version;
     private String firstname;
     private String lastname;
     private String fullname;

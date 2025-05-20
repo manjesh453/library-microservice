@@ -20,7 +20,7 @@ public class Book {
     @LastModifiedDate
     private Date lastModifiedDate;
     @Version
-    private Long version = 0L;
+    private Long version;
     private String title;
     private String description;
     private String authorName;
