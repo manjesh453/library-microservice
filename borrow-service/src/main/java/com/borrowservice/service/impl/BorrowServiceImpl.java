@@ -7,6 +7,7 @@ import com.borrowservice.exception.ResourceNotFoundException;
 import com.borrowservice.repo.BorrowRepo;
 import com.borrowservice.service.BorrowService;
 import com.borrowservice.shared.Status;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,11 @@ import java.util.List;
 public class BorrowServiceImpl implements BorrowService {
     private final BorrowRepo borrowRepo;
     private final ModelMapper modelMapper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public String borrowBook(BorrowRequestDto requestDto) {
-        Borrow borrow = modelMapper.map(requestDto, Borrow.class);
+        Borrow borrow = objectMapper.convertValue(requestDto, Borrow.class);
         borrow.setStatus(Status.ACTIVE);
         borrowRepo.save(borrow);
         return "You have successfully borrowed the book!";
