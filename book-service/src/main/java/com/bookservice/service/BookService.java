@@ -5,6 +5,7 @@ import com.bookservice.dto.BookResponseDto;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface BookService {
 
@@ -17,4 +18,5 @@ public interface BookService {
     List<BookResponseDto> getBooksByStatus(String status);
     String borrowBook(String bookId);
     String returnBook(String bookId);
+    Map<String,Integer> countBook();
 }

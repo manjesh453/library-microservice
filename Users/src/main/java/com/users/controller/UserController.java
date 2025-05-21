@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
@@ -58,6 +59,11 @@ public class UserController {
     @PostMapping("/changePassword/{email}")
     public String changePassword(@PathVariable String email, @RequestBody ChangePasswordDto dto) {
         return userService.changePassword(email, dto);
+    }
+
+    @GetMapping("/admin/user_statics")
+    public Map<String,Integer> countUsers(){
+        return userService.getUserByCount();
     }
 
     @GetMapping("/test")

@@ -17,7 +17,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -98,6 +100,15 @@ public class BookServiceImpl implements BookService {
         book.setNumberOfBooks(book.getNumberOfBooks() + 1);
         bookRepo.save(book);
         return "Book has been return successfully";
+    }
+
+    @Override
+    public Map<String, Integer> countBook() {
+        Map<String,Integer> map=new HashMap<>();
+        map.put("ACTIVE", bookRepo.countByStatus(Status.ACTIVE));
+        map.put("INACTIVE", bookRepo.countByStatus(Status.INACTIVE));
+        map.put("DELETED", bookRepo.countByStatus(Status.DELETED));
+        return map;
     }
 
     private Book getAlreadyExistsBookById(String id) {
