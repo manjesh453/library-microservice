@@ -10,6 +10,7 @@ public class BookResponseDto {
     private String description;
     private String authorName;
     private String categoryId;
+    private String imageName;
     private String status;
     private int numberOfBooks;
 }

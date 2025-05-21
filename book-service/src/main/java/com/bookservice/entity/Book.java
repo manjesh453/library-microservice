@@ -27,5 +27,6 @@ public class Book {
     private String categoryId;
     private int numberOfBooks;
     private Status status;
+    private String imageName;
 
 }

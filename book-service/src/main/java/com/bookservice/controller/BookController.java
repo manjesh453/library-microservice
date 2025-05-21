@@ -3,9 +3,13 @@ package com.bookservice.controller;
 import com.bookservice.dto.BookRequestDto;
 import com.bookservice.dto.BookResponseDto;
 import com.bookservice.service.BookService;
+import com.bookservice.service.FileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -13,15 +17,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
+    private final FileService fileService;
+    @Value("${project.image}")
+    private String path;
 
     @PostMapping("/admin/add")
-    public String addBook(@RequestBody BookRequestDto book) {
-        return bookService.createBook(book);
+    public String addBook(@RequestPart("image") MultipartFile image, @RequestPart BookRequestDto book) throws IOException {
+        String filename = fileService.uploadImage(path, image);
+        return bookService.createBook(book,filename);
     }
 
     @PostMapping("/update/{id}")
-    public String updateBook(@RequestBody BookRequestDto book, @PathVariable String id) {
-        return bookService.updateBook(book, id);
+    public String updateBook(@RequestPart("image") MultipartFile image, @RequestPart BookRequestDto book, @PathVariable String id) throws IOException {
+        String filename = fileService.uploadImage(path, image);
+        return bookService.updateBook(book, id,filename);
     }
 
     @GetMapping("/admin/delete/{id}")
