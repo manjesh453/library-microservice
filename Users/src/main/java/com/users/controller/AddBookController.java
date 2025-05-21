@@ -1,5 +1,6 @@
 package com.users.controller;
 
+import com.users.dto.ReturnBookDto;
 import com.users.service.BorrowBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +15,13 @@ public class AddBookController {
     private final BorrowBookService bookService;
 
     @PostMapping("/borrowBook")
-    public String borrowBook(@RequestBody String bookId,@RequestBody String userId) {
-        return bookService.borrowBook(bookId, userId);
+    public String borrowBook(@RequestBody ReturnBookDto returnBookDto) {
+        return bookService.borrowBook(returnBookDto.getBookId(), returnBookDto.getUserId());
     }
 
     @PostMapping("/returnBook")
-    public String returnBook(@RequestBody String bookId,@RequestBody String userId) {
-        return bookService.returnBook(bookId, userId);
+    public String returnBook(@RequestBody ReturnBookDto returnBookDto) {
+        return bookService.returnBook(returnBookDto.getBookId(), returnBookDto.getUserId());
     }
 
 }
