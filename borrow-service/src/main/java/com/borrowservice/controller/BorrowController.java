@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -63,5 +64,10 @@ public class BorrowController {
     @PostMapping("/returnBorrowBook/{userId}")
     public String returnBorrowBook(@PathVariable String userId,@RequestBody String bookId){
         return borrowService.returnBorrowBook(userId,bookId);
+    }
+
+    @GetMapping("/admin/statistic")
+    public Map<String, Integer> getStatistic(){
+        return borrowService.countBorrow();
     }
 }

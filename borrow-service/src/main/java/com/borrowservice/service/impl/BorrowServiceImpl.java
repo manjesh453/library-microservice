@@ -13,7 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +27,13 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     public String borrowBook(BorrowRequestDto requestDto) {
         Borrow borrow = objectMapper.convertValue(requestDto, Borrow.class);
-        borrow.setStatus(Status.ACTIVE);
-        borrowRepo.save(borrow);
-        return "You have successfully borrowed the book!";
+        if(borrowRepo.findByUserIdAndBookId(requestDto.getUserId(), borrow.getBookId()) == null) {
+            borrow.setStatus(Status.ACTIVE);
+            borrowRepo.save(borrow);
+            return "You have successfully borrowed the book!";
+        }else {
+            return "You have already borrowed the book!";
+        }
     }
 
     @Override
@@ -88,11 +94,22 @@ public class BorrowServiceImpl implements BorrowService {
     public String returnBorrowBook(String Id,String bookId) {
         Borrow borrow=borrowRepo.findByUserIdAndBookId(Id, bookId);
         borrow.setReturnDate(new Date());
+        borrow.setStatus(Status.RETURNED);
         borrowRepo.save(borrow);
         return "You have successfully returned borrowed date of the book!";
+    }
+
+    @Override
+    public Map<String, Integer> countBorrow() {
+        Map<String,Integer> map=new HashMap<>();
+        map.put("ACTIVE", borrowRepo.countByStatus(Status.ACTIVE));
+        map.put("RETURNED", borrowRepo.countByStatus(Status.RETURNED));
+        return map;
     }
 
     private Borrow getBorrowById(String id) {
         return borrowRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book", "borrowId", id));
     }
+
+
 }

@@ -5,6 +5,7 @@ import com.borrowservice.dto.BorrowResponseDto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface BorrowService {
     String borrowBook(BorrowRequestDto requestDto);
@@ -17,5 +18,6 @@ public interface BorrowService {
     String approveBorrowBook(String Id,String bookId);
     List<BorrowResponseDto> getBorrowedBooksByApprovedAdmin(String userId);
     String returnBorrowBook(String Id,String bookId);
+    Map<String,Integer> countBorrow();
 
 }
