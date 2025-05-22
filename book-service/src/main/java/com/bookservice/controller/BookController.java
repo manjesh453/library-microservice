@@ -83,4 +83,9 @@ public class BookController {
     public Map<String, Integer> countBook(){
         return bookService.countBook();
     }
+
+    @GetMapping("/searchBook/{title}")
+    public List<BookResponseDto> searchBook(@PathVariable String title){
+        return bookService.searchByTitle(title);
+    }
 }

@@ -111,6 +111,12 @@ public class BookServiceImpl implements BookService {
         return map;
     }
 
+    @Override
+    public List<BookResponseDto> searchByTitle(String title) {
+        List<Book> books = bookRepo.findByTitle(title);
+        return books.stream().map(li->modelMapper.map(li, BookResponseDto.class)).toList();
+    }
+
     private Book getAlreadyExistsBookById(String id) {
         return bookRepo.findById(id).orElseThrow(() ->
         {

@@ -19,4 +19,5 @@ public interface BookService {
     String borrowBook(String bookId);
     String returnBook(String bookId);
     Map<String,Integer> countBook();
+    List<BookResponseDto> searchByTitle(String title);
 }
