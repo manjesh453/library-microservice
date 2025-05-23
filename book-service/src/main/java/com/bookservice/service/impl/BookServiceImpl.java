@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -115,6 +116,14 @@ public class BookServiceImpl implements BookService {
     public List<BookResponseDto> searchByTitle(String title) {
         List<Book> books = bookRepo.findByTitle(title);
         return books.stream().map(li->modelMapper.map(li, BookResponseDto.class)).toList();
+    }
+
+    @Override
+    public List<BookResponseDto> unauthorizedUser() {
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        List<Book> books = bookRepo.findByStatus(Status.ACTIVE,pageRequest);
+        return books.stream().map(li->modelMapper.map(li, BookResponseDto.class)).toList();
+
     }
 
     private Book getAlreadyExistsBookById(String id) {

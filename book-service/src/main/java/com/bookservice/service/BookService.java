@@ -20,4 +20,5 @@ public interface BookService {
     String returnBook(String bookId);
     Map<String,Integer> countBook();
     List<BookResponseDto> searchByTitle(String title);
+    List<BookResponseDto> unauthorizedUser();
 }

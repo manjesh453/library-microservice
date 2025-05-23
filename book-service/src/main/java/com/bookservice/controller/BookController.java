@@ -88,4 +88,9 @@ public class BookController {
     public List<BookResponseDto> searchBook(@PathVariable String title){
         return bookService.searchByTitle(title);
     }
+
+    @GetMapping("/unAuthorized")
+    public List<BookResponseDto> unAuthorized(){
+        return bookService.unauthorizedUser();
+    }
 }
