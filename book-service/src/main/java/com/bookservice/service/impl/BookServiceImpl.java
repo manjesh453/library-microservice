@@ -34,6 +34,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public String createBook(BookRequestDto book, String fileName) {
         Book bookEntity = modelMapper.map(book, Book.class);
+        bookEntity.setId(null);
         bookEntity.setImageName(fileName);
         bookEntity.setStatus(Status.ACTIVE);
         bookRepo.save(bookEntity);
